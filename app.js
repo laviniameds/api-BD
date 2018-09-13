@@ -4,9 +4,9 @@ var app = express();
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
 
-var coisa = require('./routes/coisa');
+var usuario = require('./routes/usuario');
 
-app.use("/api/coisa", coisa);
+app.use("/api/usuario", usuario);
 
 app.listen(3000, function(){
     console.log("eaaaeee");
