@@ -1,16 +1,17 @@
 const defaultState = {
-  contacts: [],
-  contact: {name:{}},
+  usuarios: [],
+  usuario: {nome:{}},
   loading: false,
   errors:{}
 }
 
 export default (state=defaultState, action={}) => {
+
   switch (action.type) {
     case 'FETCH_USUARIOS_FULFILLED': {
       return {
         ...state,
-        contacts: action.payload.data.data,
+        usuarios: action.payload.data,
         loading: false,
         errors: {}
       }
@@ -35,7 +36,7 @@ export default (state=defaultState, action={}) => {
     case 'NEW_USUARIO': {
       return {
         ...state,
-        contact: {name:{}}
+        usuario: {name:{}}
       }
     }
 
@@ -49,7 +50,7 @@ export default (state=defaultState, action={}) => {
     case 'SAVE_USUARIO_FULFILLED': {
       return {
         ...state,
-        contacts: [...state.contacts, action.payload.data],
+        usuarios: [...state.usuarios, action.payload.data],
         errors: {},
         loading: false
       }
@@ -71,14 +72,14 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         loading: true,
-        contact: {name:{}}
+        usuario: {nome:{}}
       }
     }
 
     case 'FETCH_USUARIO_FULFILLED': {
       return {
         ...state,
-        contact: action.payload.data,
+        usuario: action.payload.data,
         errors: {},
         loading: false
       }
@@ -92,10 +93,10 @@ export default (state=defaultState, action={}) => {
     }
 
     case 'UPDATE_USUARIO_FULFILLED': {
-      const contact = action.payload.data;
+      const usuario = action.payload.data;
       return {
         ...state,
-        contacts: state.contacts.map(item => item._id === contact._id ? contact : item),
+        usuarios: state.usuarios.map(item => item._id === usuario._id ? usuario : item),
         errors: {},
         loading: false
       }
@@ -113,10 +114,11 @@ export default (state=defaultState, action={}) => {
     }
 
     case 'DELETE_USUARIO_FULFILLED': {
-      const _id = action.payload.data._id;
+      const id = action.payload.data.id;
+      console.log(action);
       return {
         ...state,
-        contacts: state.contacts.filter(item => item._id !== _id)
+        usuarios: state.usuarios.filter(item => item.id !== id)
       }
     }
 

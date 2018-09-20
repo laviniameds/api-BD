@@ -4,18 +4,23 @@ import { Field, reduxForm } from 'redux-form';
 import classnames from 'classnames';
 
 const validate = (values) => {
-  const errors = {name:{}};
-  if(!values.name || !values.name.first) {
-    errors.name.first = {
-      message: 'You need to provide First Name'
+  const errors = {};
+  if(!values.nome) {
+    errors.nome = {
+      message: 'You need to provide Name'
     }
   }
-  if(!values.phone) {
-    errors.phone = {
+  if(!values.senha) {
+    errors.senha = {
+      message: 'You need to provide Senha'
+    }
+  }
+  if(!values.telefone) {
+    errors.telefone = {
       message: 'You need to provide a Phone number'
     }
-  } else if(!/^\+(?:[0-9] ?){6,14}[0-9]$/.test(values.phone)) {
-    errors.phone = {
+  } else if(false && !/^\+(?:[0-9]?){6,14}[0-9]$/.test(values.telefone)) {
+    errors.telefone = {
       message: 'Phone number must be in International format'
     }
   }
@@ -31,12 +36,12 @@ const validate = (values) => {
   return errors;
 }
 
-class ContactForm extends Component {
+class UsuarioForm extends Component {
 
-  componentWillReceiveProps = (nextProps) => { // Load Contact Asynchronously
-    const { contact } = nextProps;
-    if(contact._id !== this.props.contact._id) { // Initialize form only once
-      this.props.initialize(contact)
+  componentWillReceiveProps = (nextProps) => { // Load Usuario Asynchronously
+    const { usuario } = nextProps;
+    if(usuario.id !== this.props.usuario.id) { // Initialize form only once
+      this.props.initialize(usuario)
     }
   }
 
@@ -49,18 +54,16 @@ class ContactForm extends Component {
   )
 
   render() {
-    const { handleSubmit, pristine, submitting, loading, contact } = this.props;
+    const { handleSubmit, pristine, submitting, loading, usuario } = this.props;
     return (
       <Grid centered columns={2}>
         <Grid.Column>
-          <h1 style={{marginTop:"1em"}}>{contact._id ? 'Edit Contact' : 'Add New Contact'}</h1>
+          <h1 style={{marginTop:"1em"}}>{usuario._id ? 'Edit Usuario' : 'Add New Usuario'}</h1>
           <Form onSubmit={handleSubmit} loading={loading}>
-            <Form.Group widths='equal'>
-              <Field name="name.first" type="text" component={this.renderField} label="First Name"/>
-              <Field name="name.last" type="text" component={this.renderField} label="Last Name"/>
-            </Form.Group>
-            <Field name="phone" type="text" component={this.renderField} label="Phone"/>
+            <Field name="nome" type="text" component={this.renderField} label="Nome"/>
+            <Field name="telefone" type="text" component={this.renderField} label="Telefone"/>
             <Field name="email" type="text" component={this.renderField} label="Email"/>
+            <Field name="senha" type="password" component={this.renderField} label="Senha"/>
             <Button primary type='submit' disabled={pristine || submitting}>Save</Button>
           </Form>
         </Grid.Column>
@@ -69,4 +72,4 @@ class ContactForm extends Component {
   }
 }
 
-export default reduxForm({form: 'contact', validate})(ContactForm);
+export default reduxForm({form: 'usuario', validate})(UsuarioForm);

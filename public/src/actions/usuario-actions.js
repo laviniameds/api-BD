@@ -41,7 +41,7 @@ export function updateUsuario(usuario) {
   return dispatch => {
     return dispatch({
       type: 'UPDATE_USUARIO',
-      payload: client.put(`${url}/${usuario._id}`, usuario)
+      payload: client.put(`${url}/${usuario.id}`, usuario)
     })
   }
 }

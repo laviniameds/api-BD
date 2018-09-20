@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import ContactReducer from './contact-reducer';
+import UsuarioReducer from './usuario-reducer';
 import { reducer as formReducer } from 'redux-form';
 
 const reducers = {
-  contactStore: ContactReducer,
+  usuarioStore: UsuarioReducer,
   form: formReducer
 }
 

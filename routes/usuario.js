@@ -72,6 +72,7 @@ router.delete("/:id", function(req, res){
         if (err) {
             return console.error('error running query', err);
         }
+        res.send({id: parseInt(req.params.id)});
     });
 
 })

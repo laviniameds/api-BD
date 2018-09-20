@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Message, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import ContactCard from './contact-card';
+import UsuarioCard from './usuario-card';
 
-export default function ContactList({contacts, loading, errors, deleteContact}){
+export default function UsuarioList({usuarios, loading, errors, deleteUsuario}){
 
   const loadingMessage = (
       <Message icon info>
@@ -21,8 +21,8 @@ export default function ContactList({contacts, loading, errors, deleteContact}){
         <Message.Content>
            <Message.Header>No Contacts Found</Message.Header>
            <p>Add some new contacts to get started.</p>
-           <Link to={'/contacts/new'} className="ui button primary">Add New Contact</Link>
-       </Message.Content>
+            <Link to={'/usuarios/new'} className="ui button primary">Add New Usuario</Link>
+        </Message.Content>
       </Message>
     )
 
@@ -37,14 +37,14 @@ export default function ContactList({contacts, loading, errors, deleteContact}){
     )
 
   const cards = () => {
-    return contacts.map(contact => {
+    return usuarios.map(usuario => {
       return (
-        <ContactCard key={contact._id} contact={contact} deleteContact={deleteContact} />
+        <UsuarioCard key={usuario.id} usuario={usuario} deleteUsuario={deleteUsuario} />
       )
     })
   }
 
-  const contactList = (
+  const usuarioList = (
     <Card.Group>
       { cards() }
     </Card.Group>
@@ -53,9 +53,9 @@ export default function ContactList({contacts, loading, errors, deleteContact}){
   return (
     <div>
       { loading && loadingMessage }
-      { contacts.length === 0 && !loading  && !errors.global && emptyMessage }
+      { usuarios.length === 0 && !loading  && !errors.global && emptyMessage }
       { errors.global && timeoutMessage }
-      { contacts.length > 0 && contactList }
+      { usuarios.length > 0 && usuarioList }
     </div>
   )
 }
